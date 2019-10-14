@@ -12,10 +12,6 @@ class FamilyTree {
     //console.log("this", this);
     this.children.push(child);
     //console.log(this.children);
-
-    //parent.append(child);
-
-    //console.log(this.value.child);
   }
   //`familySize`: Returns this size of **this parent and their children.**
   familySize() {
@@ -30,10 +26,18 @@ class FamilyTree {
   //member exists. Otherwise, returns undefined.
   findMember(name) {
     let match = undefined;
-    this.children.forEach(kid => {
-      //console.log("kid", kid);
-      if (kid.value === name) match = kid;
-    });
+    let nameToFind = name;
+    if ((this.value = name)) return this;
+    for (let i = 0; i < this.children.length; i++) {
+      let kid = this.children[i];
+      console.log(kid.children);
+      if (kid.value === nameToFind) match = kid;
+      else {
+        if (kid.children.length > 0) {
+          match = kid.children.findMember(name);
+        }
+      }
+    }
     return match;
   }
   //`log`: Logs out a specific structure (exampled below) of the family from this point down.
